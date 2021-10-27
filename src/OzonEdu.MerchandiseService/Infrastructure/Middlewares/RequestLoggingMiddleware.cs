@@ -25,8 +25,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
 
         private async Task LogRequest(HttpContext context)
         {
+            _logger.LogInformation("Request logged begin");
             try
             {
+                /*
                 if (context.Request.ContentLength > 0)
                 {
                     context.Request.EnableBuffering();
@@ -34,15 +36,22 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
                     var buffer = new byte[context.Request.ContentLength.Value];
                     await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
                     var bodyAsText = Encoding.UTF8.GetString(buffer);
-                    _logger.LogInformation("Request logged");
                     _logger.LogInformation(bodyAsText);
 
                     context.Request.Body.Position = 0;
+                }*/
+                
+                _logger.LogInformation("Route:" + context.Request.Path.Value.ToString());
+                _logger.LogInformation("Headers:");
+                foreach (var header in context.Request.Headers)
+                {
+                    _logger.LogInformation($"{header.Key}:{header.Value.ToString()}");
                 }
+                _logger.LogInformation("Request logged end");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Could not log request body");
+                _logger.LogError(e, "Could not log request");
             }
         }
     }

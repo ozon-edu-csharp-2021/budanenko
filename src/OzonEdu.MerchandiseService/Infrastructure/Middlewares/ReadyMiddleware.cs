@@ -5,14 +5,19 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
 {
     public class ReadyMiddleware
     {
+        private readonly RequestDelegate _next;
+
         public ReadyMiddleware(RequestDelegate next)
         {
+            _next = next;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var statusCode = StatusCodes.Status200OK;
-            await context.Response.WriteAsync(statusCode.ToString());
+            //var statusCode = StatusCodes.Status200OK;
+            await _next(context);
+            context.Response.StatusCode = StatusCodes.Status200OK;
+            await context.Response.WriteAsync(StatusCodes.Status200OK.ToString());
         }
     }
 }

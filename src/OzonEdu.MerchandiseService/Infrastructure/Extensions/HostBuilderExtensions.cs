@@ -17,7 +17,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
         {
             builder.ConfigureServices(services =>
             {
-                services.AddSingleton<IStartupFilter, TerminalStartupFilter>();
+                services.AddSingleton<IStartupFilter, MainStartupFilter>();
 
                 services.AddSingleton<IStartupFilter, SwaggerStartupFilter>();
                 services.AddSwaggerGen(options =>

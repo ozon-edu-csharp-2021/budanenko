@@ -8,8 +8,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
 {
     public class VersionMiddleware
     {
+        private readonly RequestDelegate _next;
         public VersionMiddleware(RequestDelegate next)
         {
+            _next = next;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -23,8 +25,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
             var jsonResult = new JsonResult(resultObject)
             {
                 ContentType = MediaTypeNames.Application.Json,
-                StatusCode = StatusCodes.Status200OK 
+                StatusCode = StatusCodes.Status200OK
             };
+            await _next(context);
             await context.Response.WriteAsJsonAsync(jsonResult);
         }
     }

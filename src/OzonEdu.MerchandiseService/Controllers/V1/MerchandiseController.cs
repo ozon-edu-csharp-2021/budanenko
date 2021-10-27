@@ -18,12 +18,32 @@ namespace OzonEdu.MerchandiseService.Controllers.V1
         }
         
         /// <summary>
-        /// Запросить мерч
+        /// Запросить все
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken token)
         {
             var merchItems = await _merchandiseService.GetAll(token);
+            return Ok(merchItems);
+        }
+        
+        /// <summary>
+        /// Получить информация о выданном мерче
+        /// </summary>
+        [HttpGet("employee/{employeeId:long}")]
+        public async Task<IActionResult> MerchandiseIssuedEmployee(long employeeId, CancellationToken token)
+        {
+            var merchItems = await _merchandiseService.MerchandiseIssuedEmployee(employeeId, token);
+            return Ok(merchItems);
+        }
+        
+        /// <summary>
+        /// Запрос на выдачу мерча
+        /// </summary>
+        [HttpPost("employee/{employeeId:long}/request")]
+        public async Task<IActionResult> MerchandiseRequest(long employeeId, CancellationToken token)
+        {
+            var merchItems = await _merchandiseService.MerchandiseRequest(employeeId, token);
             return Ok(merchItems);
         }
     }
