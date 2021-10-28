@@ -2,10 +2,12 @@ namespace OzonEdu.MerchandiseService.HttpModels
 {
     public class MerchItemResponse
     {
-        public long ItemId { get; set; }
+        public long MerchItemId { get; }
 
-        public string ItemName { get; set; }
+        public long? ResponsibleManagerId { get; }
 
-        public int Quantity { get; set; }
+        public long EmployeeId { get; }
+
+        public long? StockItemId { get; }
     }
 }

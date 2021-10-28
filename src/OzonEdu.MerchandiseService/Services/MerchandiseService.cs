@@ -31,5 +31,16 @@ namespace OzonEdu.MerchandiseService.Services
             MerchItems.Add(newMerchItem);
             return Task.FromResult(newMerchItem);
         }
+        
+        public Task<MerchItem> AddMerchandiseRequest(MerchItemModelCreate merchItem, CancellationToken _)
+        {
+            var newItemId = MerchItems.Max(x => x.MerchItemId) + 1;
+            var newMerchItem = new MerchItem(newItemId, null, merchItem.EmployeeId, null);
+            MerchItems.Add(newMerchItem);
+            return Task.FromResult(newMerchItem);
+        }
+        
+        public Task<List<MerchItem>> GetMerchandiseIssuedEmployee(MerchItemModelGet merchItem, CancellationToken token)=> 
+            Task.FromResult(MerchItems.FindAll(x => x.EmployeeId == merchItem.EmployeeId));
     }
 }

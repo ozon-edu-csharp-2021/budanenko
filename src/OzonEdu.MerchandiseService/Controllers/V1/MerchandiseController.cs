@@ -1,6 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OzonEdu.MerchandiseService.HttpModels;
+using OzonEdu.MerchandiseService.Models;
 using OzonEdu.MerchandiseService.Services.Interfaces;
 
 namespace OzonEdu.MerchandiseService.Controllers.V1
@@ -11,12 +13,12 @@ namespace OzonEdu.MerchandiseService.Controllers.V1
     public class MerchandiseController : ControllerBase
     {
         private readonly IMerchandiseService _merchandiseService;
-        
+
         public MerchandiseController(IMerchandiseService merchandiseService)
         {
             _merchandiseService = merchandiseService;
         }
-        
+
         /// <summary>
         /// Запросить все
         /// </summary>
@@ -26,9 +28,9 @@ namespace OzonEdu.MerchandiseService.Controllers.V1
             var merchItems = await _merchandiseService.GetAll(token);
             return Ok(merchItems);
         }
-        
+
         /// <summary>
-        /// Получить информация о выданном мерче
+        /// Получить информацию о выданном мерче
         /// </summary>
         [HttpGet("employee/{employeeId:long}")]
         public async Task<IActionResult> MerchandiseIssuedEmployee(long employeeId, CancellationToken token)
@@ -36,7 +38,7 @@ namespace OzonEdu.MerchandiseService.Controllers.V1
             var merchItems = await _merchandiseService.MerchandiseIssuedEmployee(employeeId, token);
             return Ok(merchItems);
         }
-        
+
         /// <summary>
         /// Запрос на выдачу мерча
         /// </summary>
