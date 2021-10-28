@@ -27,7 +27,7 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         public async Task<IActionResult> GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel,
             CancellationToken token)
         {
-            throw new Exception("Error");
+          //  throw new Exception("Error");
             var merchItems = await _merchandiseService.GetMerchandiseIssuedEmployee(new MerchItemModelGet
             {
                 EmployeeId = getMerchandiseIssuedEmployeeModel.EmployeeId
