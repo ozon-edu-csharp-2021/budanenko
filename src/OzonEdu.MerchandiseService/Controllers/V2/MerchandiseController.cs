@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,6 @@ using OzonEdu.MerchandiseService.Services.Interfaces;
 namespace OzonEdu.MerchandiseService.Controllers.V2
 {
     [ApiController]
-    [Route("v2/api/merchandise")]
     [Produces("application/json")]
     public class MerchandiseController : ControllerBase
     {
@@ -22,13 +22,15 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// <summary>
         /// Получить информацию о выданном мерче
         /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> GetMerchandiseIssuedEmployee(MerchItemGetViewModel getViewModel,
+        [HttpPost]
+        [Route("v2/api/merchandise/get")]
+        public async Task<IActionResult> GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel,
             CancellationToken token)
         {
+            throw new Exception("Error");
             var merchItems = await _merchandiseService.GetMerchandiseIssuedEmployee(new MerchItemModelGet
             {
-                EmployeeId = getViewModel.EmployeeId
+                EmployeeId = getMerchandiseIssuedEmployeeModel.EmployeeId
             }, token);
             return Ok(merchItems);
         }
@@ -37,7 +39,8 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// Добавляет запрос на выдачу мерча
         /// </summary>
         [HttpPost]
-        public async Task<ActionResult<MerchItem>> AddMerchandiseRequest(MerchItemPostViewModel postViewModel,
+        [Route("v2/api/merchandise/add")]
+        public async Task<ActionResult<MerchItem>> AddMerchandiseRequest(AddMerchandiseRequestModel postViewModel,
             CancellationToken token)
         {
             var createdMerchItem = await _merchandiseService.AddMerchandiseRequest(new MerchItemModelCreate

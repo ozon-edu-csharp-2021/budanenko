@@ -11,9 +11,9 @@ namespace OzonEdu.MerchandiseService.HttpClients
 {
     public interface IMerchandiseHttpClient
     {
-     //   Task<List<MerchItemResponse>> V2GetMerchandiseIssuedEmployee(CancellationToken token);
+        Task<List<MerchItemResponse>> V2GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel, CancellationToken token);
         
-        Task<List<MerchItemResponse>> V2AddMerchandiseRequest(CancellationToken token);
+        Task<List<MerchItemResponse>> V2AddMerchandiseRequest(AddMerchandiseRequestModel postViewModel, CancellationToken token);
     }
 
     public class MerchandiseHttpClient : IMerchandiseHttpClient
@@ -24,19 +24,17 @@ namespace OzonEdu.MerchandiseService.HttpClients
         {
             _httpClient = httpClient;
         }
-/*
-        public async Task<List<MerchItemResponse>> GetMerchandiseIssuedEmployee(CancellationToken token)
+
+        public async Task<List<MerchItemResponse>> V2GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel, CancellationToken token)
         {
-            var getViewModel = new MerchItemGetViewModel {EmployeeId = 28};
-            using var response = await _httpClient.GetAsync("v2/api/merchandise", getViewModel, token);
+            using var response = await _httpClient.PostAsJsonAsync("v2/api/merchandise/get", getMerchandiseIssuedEmployeeModel, token);
             var body = await response.Content.ReadAsStringAsync(token);
             return JsonSerializer.Deserialize<List<MerchItemResponse>>(body);
         }
-*/
-        public async Task<List<MerchItemResponse>> V2AddMerchandiseRequest(CancellationToken token)
+
+        public async Task<List<MerchItemResponse>> V2AddMerchandiseRequest(AddMerchandiseRequestModel postViewModel, CancellationToken token)
         {
-            var getViewModel = new MerchItemPostViewModel {EmployeeId = 28};
-            using var response = await _httpClient.PostAsJsonAsync("v2/api/merchandise", getViewModel, token);
+            using var response = await _httpClient.PostAsJsonAsync("v2/api/merchandise/add", postViewModel, token);
             var body = await response.Content.ReadAsStringAsync(token);
             return JsonSerializer.Deserialize<List<MerchItemResponse>>(body);
         }
