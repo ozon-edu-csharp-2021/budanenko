@@ -1,0 +1,38 @@
+syntax = "proto3";
+option csharp_namespace = "OzonEdu.MerchandiseService.Grpc";
+package MerchandiseService;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+
+service MerchandiseServiceGrpc {
+    rpc GetMerchandiseIssuedEmployee (GetMerchandiseIssuedEmployeeRequest) returns (GetMerchandiseIssuedEmployeeResponse);
+    rpc AddMerchandise (AddMerchandiseRequest) returns (AddMerchandiseResponse);
+}
+
+message GetMerchandiseIssuedEmployeeRequest {
+  int64 employee_id = 1;
+}
+
+message GetMerchandiseIssuedEmployeeResponse {
+  repeated GetMerchandiseIssuedEmployeeResponseUnit list_merch = 1;
+}
+
+message GetMerchandiseIssuedEmployeeResponseUnit {
+  int64 merch_item_id = 1;
+  google.protobuf.Int64Value responsible_manager_id = 2;
+  int64 employee_id = 3;
+  google.protobuf.Int64Value stock_item_id = 4;
+}
+
+message AddMerchandiseRequest {
+  int64 employee_id = 1;
+}
+
+message AddMerchandiseResponse {
+  int64 merch_item_id = 1;
+  google.protobuf.Int64Value responsible_manager_id = 2;
+  int64 employee_id = 3;
+  google.protobuf.Int64Value stock_item_id = 4;
+}
