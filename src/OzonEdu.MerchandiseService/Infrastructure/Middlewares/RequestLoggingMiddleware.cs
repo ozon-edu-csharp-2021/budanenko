@@ -28,7 +28,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
             _logger.LogInformation("Request logged begin");
             try
             {
-                /*
                 if (context.Request.ContentLength > 0)
                 {
                     context.Request.EnableBuffering();
@@ -36,16 +35,16 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
                     var buffer = new byte[context.Request.ContentLength.Value];
                     await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
                     var bodyAsText = Encoding.UTF8.GetString(buffer);
-                    _logger.LogInformation(bodyAsText);
+                    _logger.LogInformation("Body: " + bodyAsText);
 
                     context.Request.Body.Position = 0;
-                }*/
+                }
                 
-                _logger.LogInformation("Route:" + context.Request.Path.Value.ToString());
+                _logger.LogInformation("Route: " + context.Request.Path.Value.ToString());
                 _logger.LogInformation("Headers:");
                 foreach (var header in context.Request.Headers)
                 {
-                    _logger.LogInformation($"{header.Key}:{header.Value.ToString()}");
+                    _logger.LogInformation($"{header.Key}: {header.Value.ToString()}");
                 }
                 _logger.LogInformation("Request logged end");
             }

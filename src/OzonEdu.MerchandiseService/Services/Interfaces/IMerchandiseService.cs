@@ -13,7 +13,7 @@ namespace OzonEdu.MerchandiseService.Services.Interfaces
         
         Task<MerchItem> MerchandiseRequest(long employeeId, CancellationToken token);
         
-        Task<MerchItem> AddMerchandiseRequest(MerchItemModelCreate merchItem, CancellationToken token);
+        Task<MerchItem> AddMerchandise(MerchItemModelCreate merchItem, CancellationToken token);
         
         Task<List<MerchItem>> GetMerchandiseIssuedEmployee(MerchItemModelGet merchItem, CancellationToken token);
     }

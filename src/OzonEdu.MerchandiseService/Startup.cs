@@ -34,7 +34,7 @@ namespace OzonEdu.MerchandiseService
             //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<MerchandiseServiceGrpcService>();
+                endpoints.MapGrpcService<MerchandiseServiceGrpc>();
                 endpoints.MapControllers();
             });
         }

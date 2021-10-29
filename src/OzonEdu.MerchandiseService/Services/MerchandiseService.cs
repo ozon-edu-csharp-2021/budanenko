@@ -32,7 +32,7 @@ namespace OzonEdu.MerchandiseService.Services
             return Task.FromResult(newMerchItem);
         }
         
-        public Task<MerchItem> AddMerchandiseRequest(MerchItemModelCreate merchItem, CancellationToken _)
+        public Task<MerchItem> AddMerchandise(MerchItemModelCreate merchItem, CancellationToken _)
         {
             var newItemId = MerchItems.Max(x => x.MerchItemId) + 1;
             var newMerchItem = new MerchItem(newItemId, null, merchItem.EmployeeId, null);

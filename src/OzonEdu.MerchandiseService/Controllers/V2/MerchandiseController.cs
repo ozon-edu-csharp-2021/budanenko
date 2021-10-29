@@ -24,7 +24,7 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// </summary>
         [HttpPost]
         [Route("v2/api/merchandise/get")]
-        public async Task<IActionResult> GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel,
+        public async Task<ActionResult<MerchItem>> GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel,
             CancellationToken token)
         {
           //  throw new Exception("Error");
@@ -40,10 +40,10 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// </summary>
         [HttpPost]
         [Route("v2/api/merchandise/add")]
-        public async Task<ActionResult<MerchItem>> AddMerchandiseRequest(AddMerchandiseRequestModel postViewModel,
+        public async Task<ActionResult<MerchItem>> AddMerchandise(AddMerchandiseRequestModel postViewModel,
             CancellationToken token)
         {
-            var createdMerchItem = await _merchandiseService.AddMerchandiseRequest(new MerchItemModelCreate
+            var createdMerchItem = await _merchandiseService.AddMerchandise(new MerchItemModelCreate
             {
                 EmployeeId = postViewModel.EmployeeId
             }, token);

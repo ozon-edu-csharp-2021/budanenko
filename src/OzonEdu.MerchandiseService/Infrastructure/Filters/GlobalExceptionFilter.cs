@@ -20,7 +20,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Filters
                 StatusCode = StatusCodes.Status500InternalServerError
             };
             context.Result = jsonResult;
-            //context.HttpContext.Response.WriteAsJsonAsync(jsonResult);
         }
     }
 }

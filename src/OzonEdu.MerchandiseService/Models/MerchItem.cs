@@ -4,13 +4,12 @@ namespace OzonEdu.MerchandiseService.Models
 {
     public class MerchItem
     {
-        public MerchItem(long merchItemId, long? responsibleManagerId, long employeeId, long? stockItemId/*, DateTime dateIssued*/)
+        public MerchItem(long merchItemId, long? responsibleManagerId, long employeeId, long? stockItemId)
         {
             MerchItemId = merchItemId;
             ResponsibleManagerId = responsibleManagerId;
             EmployeeId = employeeId;
             StockItemId = stockItemId;
-           /* DateIssued = dateIssued;*/
         }
 
         public long MerchItemId { get; }
@@ -21,6 +20,5 @@ namespace OzonEdu.MerchandiseService.Models
         
         public long? StockItemId { get; }
 
-       // public DateTime DateIssued { get; }
     }
 }

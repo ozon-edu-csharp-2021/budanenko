@@ -30,7 +30,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
                 _logger.LogInformation("Headers:");
                 foreach (var header in context.Response.Headers)
                 {
-                    _logger.LogInformation($"{header.Key}:{header.Value.ToString()}");
+                    _logger.LogInformation($"{header.Key}: {header.Value.ToString()}");
                 }
 
                 _logger.LogInformation("Response logged end");
