@@ -45,6 +45,7 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         {
             var createdMerchItem = await _merchandiseService.AddMerchandise(new MerchItemModelCreate
             {
+                MerchPack = postViewModel.MerchPack,
                 EmployeeId = postViewModel.EmployeeId
             }, token);
             return Ok(createdMerchItem);
