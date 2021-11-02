@@ -11,16 +11,18 @@ namespace OzonEdu.MerchandiseService
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
+            WebHostEnvironment = webHostEnvironment;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IMerchandiseService, Services.MerchandiseService>();
-
+            services.AddInfrastructureServices();
             services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
         }
 

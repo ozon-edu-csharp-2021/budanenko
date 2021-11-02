@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +39,7 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// </summary>
         [HttpPost]
         [Route("v2/api/merchandise/add")]
-        public async Task<ActionResult<MerchItem>> AddMerchandise(AddMerchandiseRequestModel postViewModel,
+        public async Task<ActionResult<MerchItem>> AddMerchandise(AddMerchPackRequestModel postViewModel,
             CancellationToken token)
         {
             var createdMerchItem = await _merchandiseService.AddMerchandise(new MerchItemModelCreate

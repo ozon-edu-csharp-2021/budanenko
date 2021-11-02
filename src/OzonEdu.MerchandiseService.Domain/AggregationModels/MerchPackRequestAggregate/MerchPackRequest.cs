@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.Exceptions.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.Models;
 
@@ -12,11 +15,10 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
     public class MerchPackRequest : Entity
     {
         public MerchPackRequest(
-            RequestNumber requestNumber,
+            RequestNumber? requestNumber,
             RequestStatus requestStatus,
-            MerchPackType merchPack,
-            EmployeeId employeeId
-        )
+            MerchType merchPack,
+            EmployeeId employeeId)
         {
             RequestNumber = requestNumber;
             RequestStatus = requestStatus;
@@ -27,7 +29,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// <summary>
         /// Номер заявки
         /// </summary>
-        public RequestNumber RequestNumber { get; private set; }
+        public RequestNumber? RequestNumber { get; private set; }
 
         /// <summary>
         /// Статус заявки
@@ -37,12 +39,23 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// <summary>
         /// Пакет мерча
         /// </summary>
-        public MerchPackType MerchPack { get; private set; }
+        public MerchType MerchPack { get; private set; }
 
         /// <summary>
         /// ИД сотрудника, которому предназначается мерч
         /// </summary>
         public EmployeeId EmployeeId { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IReadOnlyCollection<MerchItemStatus>? MerchItemsStatus { get; private set; }
+
+        /// <summary>
+        /// Причина отказа в выдаче пакета мерча
+        /// </summary>
+        public ReasonDenied? ReasonDenied { get; private set; }
+        
 
         public void SetRequestNumber(RequestNumber number)
         {
@@ -58,8 +71,11 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         {
             if (RequestStatus.Equals(RequestStatus.Done))
                 throw new MerchPackRequestStatusException($"Request in done. Change status unavailable");
-        
+
             RequestStatus = status;
         }
+        
+        public void CreateMerchItemsStatus(List<MerchItemType> merchTypes){
+            MerchItemsStatus = merchTypes.Select(merchItemType => new MerchItemStatus(merchItemType)).ToList();}
     }
 }
