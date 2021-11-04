@@ -55,11 +55,11 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// Причина отказа в выдаче пакета мерча
         /// </summary>
         public ReasonDenied? ReasonDenied { get; private set; }
-        
 
-        public void SetRequestNumber(RequestNumber number)
+
+        public void SetRequestNumber(long requestNumber)
         {
-            RequestNumber = number;
+            RequestNumber = new RequestNumber(requestNumber);
         }
 
         /// <summary>
@@ -74,8 +74,10 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
 
             RequestStatus = status;
         }
-        
-        public void CreateMerchItemsStatus(List<MerchItemType> merchTypes){
-            MerchItemsStatus = merchTypes.Select(merchItemType => new MerchItemStatus(merchItemType)).ToList();}
+
+        public void CreateMerchItemsStatus(List<MerchItemType> merchTypes)
+        {
+            MerchItemsStatus = merchTypes.Select(merchItemType => new MerchItemStatus(merchItemType)).ToList();
+        }
     }
 }

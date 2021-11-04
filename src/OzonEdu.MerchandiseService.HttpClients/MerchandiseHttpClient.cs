@@ -10,7 +10,7 @@ namespace OzonEdu.MerchandiseService.HttpClients
 {
     public interface IMerchandiseHttpClient
     {
-        Task<List<MerchItemResponse>> V2GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel, CancellationToken token);
+        Task<List<MerchItemResponse>> V2GetMerchandiseIssuedEmployee(GetMerchPackIssuedEmployeeModel getMerchPackIssuedEmployeeModel, CancellationToken token);
         
         Task<List<MerchItemResponse>> V2AddMerchandiseRequest(AddMerchPackRequestModel postViewModel, CancellationToken token);
         
@@ -26,9 +26,9 @@ namespace OzonEdu.MerchandiseService.HttpClients
             _httpClient = httpClient;
         }
 
-        public async Task<List<MerchItemResponse>> V2GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel, CancellationToken token)
+        public async Task<List<MerchItemResponse>> V2GetMerchandiseIssuedEmployee(GetMerchPackIssuedEmployeeModel getMerchPackIssuedEmployeeModel, CancellationToken token)
         {
-            using var response = await _httpClient.PostAsJsonAsync("v2/api/merchandise/get", getMerchandiseIssuedEmployeeModel, token);
+            using var response = await _httpClient.PostAsJsonAsync("v2/api/merchandise/get", getMerchPackIssuedEmployeeModel, token);
             var body = await response.Content.ReadAsStringAsync(token);
             return JsonSerializer.Deserialize<List<MerchItemResponse>>(body);
         }

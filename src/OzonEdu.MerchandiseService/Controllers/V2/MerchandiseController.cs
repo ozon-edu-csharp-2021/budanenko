@@ -23,13 +23,13 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// </summary>
         [HttpPost]
         [Route("v2/api/merchandise/get")]
-        public async Task<ActionResult<MerchItem>> GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel,
+        public async Task<ActionResult<MerchItem>> GetMerchandiseIssuedEmployee(GetMerchPackIssuedEmployeeModel getMerchPackIssuedEmployeeModel,
             CancellationToken token)
         {
           //  throw new Exception("Error");
             var merchItems = await _merchandiseService.GetMerchandiseIssuedEmployee(new MerchItemModelGet
             {
-                EmployeeId = getMerchandiseIssuedEmployeeModel.EmployeeId
+                EmployeeId = getMerchPackIssuedEmployeeModel.EmployeeId
             }, token);
             return Ok(merchItems);
         }

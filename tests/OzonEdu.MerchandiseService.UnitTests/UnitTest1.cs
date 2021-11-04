@@ -18,7 +18,7 @@ namespace OzonEdu.MerchandiseService.UnitTests
                 BaseAddress = new Uri("http://localhost:5000")
             };
             var x = new MerchandiseHttpClient(client);
-            var getViewModel = new GetMerchandiseIssuedEmployeeModel
+            var getViewModel = new GetMerchPackIssuedEmployeeModel
             {
                 EmployeeId = 28
             };

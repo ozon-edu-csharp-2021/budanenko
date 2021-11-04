@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{983F10
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	README.md = README.md
+	OzonEdu.MerchandiseService.BoundedContextCanvas.drawio = OzonEdu.MerchandiseService.BoundedContextCanvas.drawio
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8B0296A0-D8BA-4649-90FA-8E1D56E4F452}"

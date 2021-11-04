@@ -1,4 +1,10 @@
 using MediatR;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAggregate;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -16,6 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddMediatR(typeof(AddMerchPackRequestCommandHandler).Assembly);
+            services.AddScoped<IMerchPackRepository, MerchPackRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IMerchPackRequestRepository, MerchPackRequestRepository>();
             
             return services;
         }

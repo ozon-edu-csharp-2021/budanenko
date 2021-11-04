@@ -1,12 +1,11 @@
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
-using OzonEdu.MerchandiseService.Domain.Services;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.Services.MailService;
 using OzonEdu.MerchandiseService.Domain.Services.StockApi;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AssembleMerchItems;
@@ -38,7 +37,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
         public async Task<Unit> Handle(AssembleMerchItemsCommand request, CancellationToken cancellationToken)
         {
             var merchPackRequest =
-                await _merchPackRequestRepository.FindByRequestNumberAsync(request.RequestNumber, cancellationToken);
+                await _merchPackRequestRepository.FindByRequestNumberAsync(new RequestNumber(request.RequestNumber), cancellationToken);
 
             var employee = await _employeeRepository.FindByIdAsync(merchPackRequest.EmployeeId, cancellationToken);
 

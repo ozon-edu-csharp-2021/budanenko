@@ -1,10 +1,8 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.Contracts;
-using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces
 {
     public interface IMerchPackRepository : IRepository<MerchPackType>
     {
@@ -14,9 +12,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
         // /// <param name="id">Идентификатор</param>
         // /// <param name="cancellationToken">Токен для отмены операции. <see cref="CancellationToken"/></param>
         // /// <returns>Объект MerchPackType</returns>
-        Task<MerchPackType> GetByIdAsync(MerchType id, CancellationToken cancellationToken = default)
-        {
-            return Task.FromResult(Enumeration.GetAll<MerchPackType>().Single(x => x.Id == (int)id));
-        }
+        Task<MerchPackType> GetByIdAsync(MerchType id, CancellationToken cancellationToken = default);
     }
 }

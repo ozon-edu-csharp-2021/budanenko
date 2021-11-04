@@ -3,12 +3,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAggregate
 {
-    public class AddMerchPackRequestCommandHandler : IRequestHandler<AddMerchPackRequestCommand>
+    public class AddMerchPackRequestCommandHandler : IRequestHandler<AddMerchPackRequestCommand, MerchPackRequest>
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMerchPackRequestRepository _merchPackRequestRepository;
@@ -21,7 +23,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
             _merchPackRequestRepository = merchPackRequestRepository;
         }
 
-        public async Task<Unit> Handle(AddMerchPackRequestCommand request, CancellationToken cancellationToken)
+        public async Task<MerchPackRequest> Handle(AddMerchPackRequestCommand request, CancellationToken cancellationToken)
         {
             var employeeId = new EmployeeId(request.EmployeeId);
             var employee = await _employeeRepository.FindByIdAsync(employeeId, cancellationToken);
@@ -38,10 +40,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
                 employeeId
             );
 
-            var result = await _merchPackRequestRepository.CreateAsync(merchPackRequest, cancellationToken);
-            await _merchPackRequestRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            var resultCreate = await _merchPackRequestRepository.CreateAsync(merchPackRequest, cancellationToken);
+            // var resultSave = await _merchPackRequestRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-            return Unit.Value;
+            return resultCreate;
         }
     }
 }

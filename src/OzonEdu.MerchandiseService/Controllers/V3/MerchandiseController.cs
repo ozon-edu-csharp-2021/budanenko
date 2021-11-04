@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.HttpModels;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest;
-using OzonEdu.MerchandiseService.Models;
+using OzonEdu.MerchandiseService.Infrastructure.Commands.GetMerchPackIssuedEmployee;
 using OzonEdu.MerchandiseService.Services.Interfaces;
 
 namespace OzonEdu.MerchandiseService.Controllers.V3
@@ -26,7 +28,8 @@ namespace OzonEdu.MerchandiseService.Controllers.V3
         /// </summary>
         [HttpPost]
         [Route("v3/api/merchandise/add")]
-        public async Task<ActionResult<MerchPackRequest>> AddMerchPackRequest(AddMerchPackRequestModel postViewModel,
+        public async Task<ActionResult<MerchPackRequest>> AddMerchPackRequest(
+            AddMerchPackRequestModel postViewModel,
             CancellationToken token)
         {
             var addMerchPackRequestCommand = new AddMerchPackRequestCommand()
@@ -37,6 +40,24 @@ namespace OzonEdu.MerchandiseService.Controllers.V3
 
             var result = await _mediator.Send(addMerchPackRequestCommand, token);
 
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Получить информацию о  мерче, выданном сотруднику
+        /// </summary>
+        [HttpPost]
+        [Route("v3/api/merchandise/get")]
+        public async Task<ActionResult<List<MerchType>>> GetMerchandiseIssuedEmployee(
+            GetMerchPackIssuedEmployeeModel getMerchPackIssuedEmployeeModel,
+            CancellationToken token)
+        {
+            var getMerchPackIssuedEmployeeCommand = new GetMerchPackIssuedEmployeeCommand()
+            {
+                EmployeeId = getMerchPackIssuedEmployeeModel.EmployeeId
+            };
+
+            var result = await _mediator.Send(getMerchPackIssuedEmployeeCommand, token);
             return Ok(result);
         }
     }
