@@ -70,7 +70,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
             if (merchPackRequest.MerchItemsStatus!.All(x => x.Status == Status.Reserved))
             {
                 await _mailServiceFacade.SendMail(employee.Email, "Приходите за мерчом!");
-                employee.Add(merchPackRequest.MerchPack);
+                employee.AddReceivedMerchType(merchPackRequest.MerchPack);
                 merchPackRequest.ChangeStatus(RequestStatus.Done);
             }
             else

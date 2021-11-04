@@ -56,7 +56,10 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// </summary>
         public ReasonDenied? ReasonDenied { get; private set; }
 
-
+        /// <summary>
+        /// Присвоить номер заявки
+        /// </summary>
+        /// <param name="requestNumber"></param>
         public void SetRequestNumber(long requestNumber)
         {
             RequestNumber = new RequestNumber(requestNumber);

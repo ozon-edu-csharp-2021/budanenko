@@ -19,12 +19,12 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
         /// Сотрудник
         /// </summary>
         public Employee(
-            EmployeeId employeeId, 
-            EmployeeFullName employeeFullName, 
-            Email email, 
+            EmployeeId employeeId,
+            EmployeeFullName employeeFullName,
+            Email email,
             HiringDate hiringDate,
             ClothingSize clothingSize,
-            FiringDate? firingDate, 
+            FiringDate? firingDate,
             IReadOnlyCollection<MerchType>? receivedMerchTypes)
         {
             _employeeId = employeeId;
@@ -36,27 +36,56 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             _receivedMerchTypes = receivedMerchTypes?.ToList() ?? new List<MerchType>();
         }
 
+        /// <summary>
+        /// Идентификатор сотрудника
+        /// </summary>
         public EmployeeId EmployeeId => _employeeId;
 
+        /// <summary>
+        /// ФИО сотрудника
+        /// </summary>
         public EmployeeFullName EmployeeFullName => _employeeFullName;
 
+        /// <summary>
+        /// Электронный адрес сотрудника
+        /// </summary>
         public Email Email => _email;
 
+        /// <summary>
+        /// Дата устройства на работу
+        /// </summary>
         public HiringDate HiringDate => _hiringDate;
 
+        /// <summary>
+        /// Размер одежды сотрудника
+        /// </summary>
         public ClothingSize ClothingSize => _clothingSize;
 
+        /// <summary>
+        /// Дата увольнения
+        /// </summary>
         public FiringDate? FiringDate => _firingDate;
 
+        /// <summary>
+        /// Список ранее выданных наборов мерча
+        /// </summary>
         public IReadOnlyCollection<MerchType> ReceivedMerchTypes => _receivedMerchTypes;
 
-
+        /// <summary>
+        /// Проверка выдавался ли ранее данный набор сотруднику
+        /// </summary>
+        /// <param name="requestMerchPack">Набор мерча</param>
+        /// <returns>Результат: выдавался или нет</returns>
         public bool IsPreviouslyReceived(MerchType requestMerchPack)
         {
             return ReceivedMerchTypes.Contains(requestMerchPack);
         }
 
-        public void Add(MerchType requestMerchPack)
+        /// <summary>
+        /// Добавить в список раннее выданных пакетов новый набор
+        /// </summary>
+        /// <param name="requestMerchPack">Набор мерча</param>
+        public void AddReceivedMerchType(MerchType requestMerchPack)
         {
             _receivedMerchTypes.Add(requestMerchPack);
         }
