@@ -7,7 +7,7 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.HttpModels;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest;
-using OzonEdu.MerchandiseService.Infrastructure.Commands.GetMerchPackIssuedEmployee;
+using OzonEdu.MerchandiseService.Infrastructure.Queries.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Services.Interfaces;
 
 namespace OzonEdu.MerchandiseService.Controllers.V3
@@ -52,12 +52,12 @@ namespace OzonEdu.MerchandiseService.Controllers.V3
             GetMerchPackIssuedEmployeeModel getMerchPackIssuedEmployeeModel,
             CancellationToken token)
         {
-            var getMerchPackIssuedEmployeeCommand = new GetMerchPackIssuedEmployeeCommand()
+            var query = new GetMerchPackIssuedEmployeeQuery()
             {
                 EmployeeId = getMerchPackIssuedEmployeeModel.EmployeeId
             };
 
-            var result = await _mediator.Send(getMerchPackIssuedEmployeeCommand, token);
+            var result = await _mediator.Send(query, token);
             return Ok(result);
         }
     }

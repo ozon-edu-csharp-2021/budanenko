@@ -15,10 +15,10 @@ using Xunit;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Tests
 {
-    public class AddMerchPackRequestCommandHandlerTests
+    public class HandlersTests
     {
         [Fact]
-        public async Task Test1()
+        public async Task AddMerchPackRequestCommandHandlerTests()
         {
             MerchPackRequest? merchPackRequest = null;
             // Arrange

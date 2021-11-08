@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using OzonEdu.MerchandiseService.Domain.AggregationModels;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
@@ -28,7 +29,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests
             employee.AddReceivedMerchType(requestMerchPack);
 
             //Assert
-            Assert.NotNull(employee.ReceivedMerchTypes);
+            Assert.True(employee.ReceivedMerchTypes.First() == MerchType.WelcomePack);
         }
         
         [Fact]
