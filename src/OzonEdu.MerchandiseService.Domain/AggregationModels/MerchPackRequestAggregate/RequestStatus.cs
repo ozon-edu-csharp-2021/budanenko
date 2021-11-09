@@ -9,6 +9,9 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// </summary>
         public static RequestStatus New = new(1, "New");
 
+        /// <summary>
+        /// В работе
+        /// </summary>
         public static RequestStatus InWork = new(1, "InWork");
 
         /// <summary>
