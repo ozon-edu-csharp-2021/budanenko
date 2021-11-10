@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AssembleMerchItems;
 using OzonEdu.MerchandiseService.Infrastructure.Interceptors;
@@ -49,33 +48,36 @@ namespace OzonEdu.MerchandiseService
         public class AssembleMerchItemsBackgroundService : BackgroundService
         {
             private Timer _timer = null!;
-            private readonly IMerchPackRequestRepository _merchPackRequestRepository;
             private readonly IMediator _mediator;
+            private readonly IServiceProvider _serviceProvider;
 
             public AssembleMerchItemsBackgroundService(
-                IMerchPackRequestRepository merchPackRequestRepository,
-                IMediator mediator)
+                IMediator mediator,
+                IServiceProvider serviceProvider)
             {
-                _merchPackRequestRepository = merchPackRequestRepository;
                 _mediator = mediator;
+                _serviceProvider = serviceProvider;
             }
 
             protected override async Task ExecuteAsync(CancellationToken stoppingToken)
             {
                 async void AssembleMerchItemsJob(object state)
                 {
+                    using var scope = _serviceProvider.CreateScope();
+                    var merchPackRequestRepository =
+                        scope.ServiceProvider.GetRequiredService<IMerchPackRequestRepository>();
                     try
                     {
                         var merchPackRequests =
-                            await _merchPackRequestRepository.GetMerchPackRequestForAssembly(stoppingToken);
+                            await merchPackRequestRepository.GetMerchPackRequestForAssembly(stoppingToken);
 
-                        foreach (var addMerchPackRequestCommand in merchPackRequests.Select(merchPackRequest =>
+                        foreach (var merchPackRequest in merchPackRequests.Select(merchPackRequest =>
                             new AssembleMerchItemsCommand()
                             {
                                 RequestNumber = merchPackRequest.RequestNumber!.Value
                             }))
                         {
-                            var result = await _mediator.Send(addMerchPackRequestCommand, stoppingToken);
+                            var result = await _mediator.Send(merchPackRequest, stoppingToken);
                         }
                     }
                     catch (Exception e)
@@ -84,7 +86,8 @@ namespace OzonEdu.MerchandiseService
                     }
                 }
 
-                _timer = new Timer(AssembleMerchItemsJob, state: null, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(45));
+                _timer = new Timer(AssembleMerchItemsJob, state: null, TimeSpan.FromSeconds(15),
+                    TimeSpan.FromSeconds(45));
             }
         }
     }

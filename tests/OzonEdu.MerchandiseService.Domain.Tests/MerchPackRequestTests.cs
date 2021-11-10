@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;

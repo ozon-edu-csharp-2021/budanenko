@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using OzonEdu.MerchandiseService.Domain.AggregationModels;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using Xunit;
 
