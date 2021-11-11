@@ -1,6 +1,6 @@
 namespace OzonEdu.MerchandiseService.HttpModels
 {
-    public class AddMerchandiseRequestModel
+    public class GetMerchPackIssuedEmployeeModel
     {
         public long EmployeeId { get; set; }
     }

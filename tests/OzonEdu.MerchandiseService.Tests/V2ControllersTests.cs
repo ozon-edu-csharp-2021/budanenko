@@ -6,19 +6,19 @@ using OzonEdu.MerchandiseService.HttpClients;
 using OzonEdu.MerchandiseService.HttpModels;
 using Xunit;
 
-namespace OzonEdu.MerchandiseService.UnitTests
+namespace OzonEdu.MerchandiseService.Tests
 {
     public class UnitTest1
     {
         [Fact]
-        public async Task Test1()
+        public async Task V2GetMerchandiseIssuedEmployeeTest()
         {
             var client = new HttpClient()
             {
                 BaseAddress = new Uri("http://localhost:5000")
             };
             var x = new MerchandiseHttpClient(client);
-            var getViewModel = new GetMerchandiseIssuedEmployeeModel
+            var getViewModel = new GetMerchPackIssuedEmployeeModel
             {
                 EmployeeId = 28
             };

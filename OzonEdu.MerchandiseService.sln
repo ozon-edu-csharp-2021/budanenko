@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{983F10
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	README.md = README.md
+	OzonEdu.MerchandiseService.BoundedContextCanvas.drawio = OzonEdu.MerchandiseService.BoundedContextCanvas.drawio
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8B0296A0-D8BA-4649-90FA-8E1D56E4F452}"
@@ -26,7 +27,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.HttpClients", "src\OzonEdu.MerchandiseService.HttpClients\OzonEdu.MerchandiseService.HttpClients.csproj", "{401ACA5A-7094-42F1-9C41-2BC86D154526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.UnitTests", "tests\OzonEdu.MerchandiseService.UnitTests\OzonEdu.MerchandiseService.UnitTests.csproj", "{7001CE40-7575-4A75-97C3-E5AA46B159C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Tests", "tests\OzonEdu.MerchandiseService.Tests\OzonEdu.MerchandiseService.Tests.csproj", "{7001CE40-7575-4A75-97C3-E5AA46B159C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Domain", "src\OzonEdu.MerchandiseService.Domain\OzonEdu.MerchandiseService.Domain.csproj", "{637DF394-C04B-4F6B-AC1F-9BF54CA5D432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Infrastructure", "src\OzonEdu.MerchandiseService.Infrastructure\OzonEdu.MerchandiseService.Infrastructure.csproj", "{278D3F53-84FD-4197-94F8-24B854B987C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Domain.Tests", "tests\OzonEdu.MerchandiseService.Domain.Tests\OzonEdu.MerchandiseService.Domain.Tests.csproj", "{577C6D02-438F-4118-942A-9870E66B3090}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Infrastructure.Tests", "tests\OzonEdu.MerchandiseService.Infrastructure.Tests\OzonEdu.MerchandiseService.Infrastructure.Tests.csproj", "{1FEF686C-3687-4878-BD04-E2CE2E370F3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +67,22 @@ Global
 		{7001CE40-7575-4A75-97C3-E5AA46B159C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7001CE40-7575-4A75-97C3-E5AA46B159C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7001CE40-7575-4A75-97C3-E5AA46B159C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637DF394-C04B-4F6B-AC1F-9BF54CA5D432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637DF394-C04B-4F6B-AC1F-9BF54CA5D432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637DF394-C04B-4F6B-AC1F-9BF54CA5D432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637DF394-C04B-4F6B-AC1F-9BF54CA5D432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278D3F53-84FD-4197-94F8-24B854B987C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278D3F53-84FD-4197-94F8-24B854B987C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278D3F53-84FD-4197-94F8-24B854B987C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278D3F53-84FD-4197-94F8-24B854B987C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{577C6D02-438F-4118-942A-9870E66B3090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577C6D02-438F-4118-942A-9870E66B3090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577C6D02-438F-4118-942A-9870E66B3090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577C6D02-438F-4118-942A-9870E66B3090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FEF686C-3687-4878-BD04-E2CE2E370F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FEF686C-3687-4878-BD04-E2CE2E370F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FEF686C-3687-4878-BD04-E2CE2E370F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FEF686C-3687-4878-BD04-E2CE2E370F3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F767020B-539C-449F-93B9-E6F3E3A9DA80} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
@@ -66,5 +91,9 @@ Global
 		{00AF7CA2-9B8E-40AF-A98D-C033D780EDBB} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
 		{401ACA5A-7094-42F1-9C41-2BC86D154526} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
 		{7001CE40-7575-4A75-97C3-E5AA46B159C9} = {8B0296A0-D8BA-4649-90FA-8E1D56E4F452}
+		{637DF394-C04B-4F6B-AC1F-9BF54CA5D432} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
+		{278D3F53-84FD-4197-94F8-24B854B987C1} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
+		{577C6D02-438F-4118-942A-9870E66B3090} = {8B0296A0-D8BA-4649-90FA-8E1D56E4F452}
+		{1FEF686C-3687-4878-BD04-E2CE2E370F3B} = {8B0296A0-D8BA-4649-90FA-8E1D56E4F452}
 	EndGlobalSection
 EndGlobal

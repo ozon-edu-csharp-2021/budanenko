@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +23,13 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// </summary>
         [HttpPost]
         [Route("v2/api/merchandise/get")]
-        public async Task<ActionResult<MerchItem>> GetMerchandiseIssuedEmployee(GetMerchandiseIssuedEmployeeModel getMerchandiseIssuedEmployeeModel,
+        public async Task<ActionResult<MerchItem>> GetMerchandiseIssuedEmployee(GetMerchPackIssuedEmployeeModel getMerchPackIssuedEmployeeModel,
             CancellationToken token)
         {
           //  throw new Exception("Error");
             var merchItems = await _merchandiseService.GetMerchandiseIssuedEmployee(new MerchItemModelGet
             {
-                EmployeeId = getMerchandiseIssuedEmployeeModel.EmployeeId
+                EmployeeId = getMerchPackIssuedEmployeeModel.EmployeeId
             }, token);
             return Ok(merchItems);
         }
@@ -40,11 +39,12 @@ namespace OzonEdu.MerchandiseService.Controllers.V2
         /// </summary>
         [HttpPost]
         [Route("v2/api/merchandise/add")]
-        public async Task<ActionResult<MerchItem>> AddMerchandise(AddMerchandiseRequestModel postViewModel,
+        public async Task<ActionResult<MerchItem>> AddMerchandise(AddMerchPackRequestModel postViewModel,
             CancellationToken token)
         {
             var createdMerchItem = await _merchandiseService.AddMerchandise(new MerchItemModelCreate
             {
+                MerchPack = postViewModel.MerchPack,
                 EmployeeId = postViewModel.EmployeeId
             }, token);
             return Ok(createdMerchItem);

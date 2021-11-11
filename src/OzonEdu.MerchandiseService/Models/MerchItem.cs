@@ -1,5 +1,3 @@
-using System;
-
 namespace OzonEdu.MerchandiseService.Models
 {
     public class MerchItem
