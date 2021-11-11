@@ -12,7 +12,7 @@ using OzonEdu.MerchandiseService.Infrastructure.Commands.AssembleMerchItems;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAggregate
 {
-    public class AssembleMerchItemsCommandHandler
+    public class AssembleMerchItemsCommandHandler : IRequestHandler<AssembleMerchItemsCommand, Unit>
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMerchPackRequestRepository _merchPackRequestRepository;

@@ -5,6 +5,8 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
+using OzonEdu.MerchandiseService.Domain.Services.MailService;
+using OzonEdu.MerchandiseService.Domain.Services.StockApi;
 using OzonEdu.MerchandiseService.Infrastructure.Handlers.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAggregate;
 
@@ -25,9 +27,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddMediatR(typeof(AddMerchPackRequestCommandHandler).Assembly);
             services.AddMediatR(typeof(GetMerchPackIssuedEmployeeQueryHandler).Assembly);
             services.AddMediatR(typeof(AssembleMerchItemsCommandHandler).Assembly);
-            services.AddScoped<IMerchPackRepository, MerchPackRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IMerchPackRepository, MerchPackRepository>();
             services.AddScoped<IMerchPackRequestRepository, MerchPackRequestRepository>();
+            services.AddScoped<IMailServiceFacade, MailServiceFacade>();
+            services.AddScoped<IStockApiFacade, StockApiFacade>();
             
             return services;
         }
