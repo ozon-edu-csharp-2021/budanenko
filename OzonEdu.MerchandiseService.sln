@@ -4,17 +4,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{C03470B5-BC3D-41F6-8361-92EA71309D71}"
-ProjectSection(SolutionItems) = preProject
-	deploy\docker-compose.yml = deploy\docker-compose.yml
-	dockerfile = dockerfile
-EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{983F10F0-EF47-48F8-8498-7009D3789947}"
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	README.md = README.md
 	OzonEdu.MerchandiseService.BoundedContextCanvas.drawio = OzonEdu.MerchandiseService.BoundedContextCanvas.drawio
+	docker-compose.yml = docker-compose.yml
+	Dockerfile = Dockerfile
+	entrypoint.sh = entrypoint.sh
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8B0296A0-D8BA-4649-90FA-8E1D56E4F452}"
@@ -36,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Domain.Tests", "tests\OzonEdu.MerchandiseService.Domain.Tests\OzonEdu.MerchandiseService.Domain.Tests.csproj", "{577C6D02-438F-4118-942A-9870E66B3090}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Infrastructure.Tests", "tests\OzonEdu.MerchandiseService.Infrastructure.Tests\OzonEdu.MerchandiseService.Infrastructure.Tests.csproj", "{1FEF686C-3687-4878-BD04-E2CE2E370F3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Migrator", "src\OzonEdu.MerchandiseService.Migrator\OzonEdu.MerchandiseService.Migrator.csproj", "{A26F0A92-E13E-4928-A5A0-D780C0AEA012}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +82,10 @@ Global
 		{1FEF686C-3687-4878-BD04-E2CE2E370F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FEF686C-3687-4878-BD04-E2CE2E370F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FEF686C-3687-4878-BD04-E2CE2E370F3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A26F0A92-E13E-4928-A5A0-D780C0AEA012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A26F0A92-E13E-4928-A5A0-D780C0AEA012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A26F0A92-E13E-4928-A5A0-D780C0AEA012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A26F0A92-E13E-4928-A5A0-D780C0AEA012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F767020B-539C-449F-93B9-E6F3E3A9DA80} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
@@ -95,5 +98,6 @@ Global
 		{278D3F53-84FD-4197-94F8-24B854B987C1} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
 		{577C6D02-438F-4118-942A-9870E66B3090} = {8B0296A0-D8BA-4649-90FA-8E1D56E4F452}
 		{1FEF686C-3687-4878-BD04-E2CE2E370F3B} = {8B0296A0-D8BA-4649-90FA-8E1D56E4F452}
+		{A26F0A92-E13E-4928-A5A0-D780C0AEA012} = {29FDA19B-B2E4-4FD7-B6C3-DDEE5D830C21}
 	EndGlobalSection
 EndGlobal

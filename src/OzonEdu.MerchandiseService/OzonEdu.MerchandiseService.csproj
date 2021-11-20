@@ -5,6 +5,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Version>1.0.1</Version>
+        <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,6 +19,7 @@
       <ProjectReference Include="..\OzonEdu.MerchandiseService.HttpClients\OzonEdu.MerchandiseService.HttpClients.csproj" />
       <ProjectReference Include="..\OzonEdu.MerchandiseService.HttpModels\OzonEdu.MerchandiseService.HttpModels.csproj" />
       <ProjectReference Include="..\OzonEdu.MerchandiseService.Infrastructure\OzonEdu.MerchandiseService.Infrastructure.csproj" />
+      <ProjectReference Include="..\OzonEdu.MerchandiseService.Migrator\OzonEdu.MerchandiseService.Migrator.csproj" />
     </ItemGroup>
 
 </Project>

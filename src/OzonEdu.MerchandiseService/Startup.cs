@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AssembleMerchItems;
+using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.Interceptors;
 using OzonEdu.MerchandiseService.Services;
 using OzonEdu.MerchandiseService.Services.Interfaces;
@@ -30,6 +31,7 @@ namespace OzonEdu.MerchandiseService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IMerchandiseService, Services.MerchandiseService>();
+            AddDatabaseComponents(services);
             services.AddInfrastructureServices();
             services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
             services.AddHostedService<AssembleMerchItemsBackgroundService>();
@@ -43,6 +45,11 @@ namespace OzonEdu.MerchandiseService
                 endpoints.MapGrpcService<MerchandiseServiceGrpc>();
                 endpoints.MapControllers();
             });
+        }
+
+        private void AddDatabaseComponents(IServiceCollection services)
+        {
+            services.Configure<DatabaseConnectionOptions>(Configuration.GetSection(nameof(DatabaseConnectionOptions)));
         }
 
         public class AssembleMerchItemsBackgroundService : BackgroundService
