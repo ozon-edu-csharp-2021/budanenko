@@ -4,7 +4,7 @@ using OzonEdu.MerchandiseService.Domain.Contracts;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces
 {
-    public interface IMerchPackRepository : IRepository<MerchPackType>
+    public interface IMerchPackRepositoryOld : IRepository<MerchPackTypeOld>
     {
         // /// <summary>
         // /// Получить MerchPackType по идентификатору
@@ -12,6 +12,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
         // /// <param name="id">Идентификатор</param>
         // /// <param name="cancellationToken">Токен для отмены операции. <see cref="CancellationToken"/></param>
         // /// <returns>Объект MerchPackType</returns>
-        Task<MerchPackType> GetByIdAsync(MerchType id, CancellationToken cancellationToken = default);
+        Task<MerchPackTypeOld> GetByIdAsync(MerchTypeOld id, CancellationToken cancellationToken = default);
     }
 }

@@ -40,7 +40,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
                 employeeId
             );
 
-            var resultCreate = await _merchPackRequestRepository.CreateAsync(merchPackRequest, cancellationToken);
+            // var resultCreate = await _merchPackRequestRepository.CreateAsync(merchPackRequest, cancellationToken);
             // var resultSave = await _merchPackRequestRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return resultCreate;

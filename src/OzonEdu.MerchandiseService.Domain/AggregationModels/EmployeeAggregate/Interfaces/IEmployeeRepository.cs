@@ -25,7 +25,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
         /// <param name="employeeId">Идентификатор сотрудника</param>
         /// <param name="cancellationToken">Токен для отмены операции</param>
         /// <returns>Коллекция типов мерча</returns>
-        Task<List<MerchType>> GetEmployeeMerchTypes(EmployeeId employeeId,
+        Task<List<MerchTypeOld>> GetEmployeeMerchTypes(EmployeeId employeeId,
             CancellationToken cancellationToken = default);
     }
 }

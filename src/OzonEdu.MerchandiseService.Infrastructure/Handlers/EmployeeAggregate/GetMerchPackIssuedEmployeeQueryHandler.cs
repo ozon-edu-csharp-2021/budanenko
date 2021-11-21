@@ -9,7 +9,7 @@ using OzonEdu.MerchandiseService.Infrastructure.Queries.EmployeeAggregate;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.EmployeeAggregate
 {
-    public class GetMerchPackIssuedEmployeeQueryHandler : IRequestHandler<GetMerchPackIssuedEmployeeQuery, List<MerchType>>
+    public class GetMerchPackIssuedEmployeeQueryHandler : IRequestHandler<GetMerchPackIssuedEmployeeQuery, List<MerchTypeOld>>
     {
         private readonly IEmployeeRepository _employeeRepository;
 
@@ -19,7 +19,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.EmployeeAggregate
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<List<MerchType>> Handle(GetMerchPackIssuedEmployeeQuery request,
+        public async Task<List<MerchTypeOld>> Handle(GetMerchPackIssuedEmployeeQuery request,
             CancellationToken cancellationToken)
         {
             var employeeId = new EmployeeId(request.EmployeeId);

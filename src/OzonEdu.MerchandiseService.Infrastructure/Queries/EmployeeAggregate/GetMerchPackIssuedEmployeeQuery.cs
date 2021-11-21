@@ -4,7 +4,7 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Queries.EmployeeAggregate
 {
-    public class GetMerchPackIssuedEmployeeQuery : IRequest<List<MerchType>>
+    public class GetMerchPackIssuedEmployeeQuery : IRequest<List<MerchTypeOld>>
     {
         public long EmployeeId { get; set; }
     }

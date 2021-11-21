@@ -15,16 +15,16 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
         {
             new Employee(new EmployeeId(7), new EmployeeFullName("Пушкин", "Александр", "Сергеевич"),
                 new Email("a.s.pushkin@ozon.ru"), new HiringDate(DateTime.Parse("2009-06-06")), ClothingSize.L, null,
-                    new List<MerchType> { MerchType.ConferenceSpeakerPack, MerchType.VeteranPack }),
+                    new List<MerchTypeOld> { MerchTypeOld.ConferenceSpeakerPack, MerchTypeOld.VeteranPack }),
                 new Employee(new EmployeeId(17), new EmployeeFullName("Лермонтов", "Михаил", "Юрьевич"),
                     new Email("m.yu.lermontov@ozon.ru"), new HiringDate(DateTime.Parse("2014-10-15")), ClothingSize.L, null,
-                    new List<MerchType> { MerchType.ConferenceSpeakerPack, MerchType.ConferenceListenerPack }),
+                    new List<MerchTypeOld> { MerchTypeOld.ConferenceSpeakerPack, MerchTypeOld.ConferenceListenerPack }),
                 new Employee(new EmployeeId(28), new EmployeeFullName("Толстой", "Лев", "Николаевич"),
                     new Email("l.n.tolstoy@ozon.ru"), new HiringDate(DateTime.Parse("2018-08-28")), ClothingSize.XXL, null,
-                    new List<MerchType> { MerchType.WelcomePack, MerchType.ProbationPeriodEndingPack }),
+                    new List<MerchTypeOld> { MerchTypeOld.WelcomePack, MerchTypeOld.ProbationPeriodEndingPack }),
                 new Employee(new EmployeeId(83), new EmployeeFullName("Достоевский", "Фёдор", "Михайлович"),
                     new Email("f.m.dostoevskiy@ozon.ru"), new HiringDate(DateTime.Parse("2021-11-11")), ClothingSize.XL, null,
-                    new List<MerchType> { MerchType.WelcomePack }), 
+                    new List<MerchTypeOld> { MerchTypeOld.WelcomePack }), 
         };
 
         public IUnitOfWork UnitOfWork { get; }
@@ -48,7 +48,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             return result;
         }
 
-        public Task<List<MerchType>> GetEmployeeMerchTypes(EmployeeId employeeId,
+        public Task<List<MerchTypeOld>> GetEmployeeMerchTypes(EmployeeId employeeId,
             CancellationToken cancellationToken = default)
         {
             Employee? employee = Employees.Find(x => x.EmployeeId.Value == employeeId.Value);

@@ -17,7 +17,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests
             var merchPackRequest = new MerchPackRequest(
                 null,
                 RequestStatus.New,
-                MerchType.WelcomePack,
+                MerchTypeOld.WelcomePack,
                 new EmployeeId(10)
             );
 
@@ -35,7 +35,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests
             var merchPackRequest = new MerchPackRequest(
                 null,
                 RequestStatus.Done,
-                MerchType.WelcomePack,
+                MerchTypeOld.WelcomePack,
                 new EmployeeId(10)
             );
             var requestStatus = RequestStatus.Done;
@@ -53,10 +53,10 @@ namespace OzonEdu.MerchandiseService.Domain.Tests
             var merchPackRequest = new MerchPackRequest(
                 null,
                 RequestStatus.Done,
-                MerchType.WelcomePack,
+                MerchTypeOld.WelcomePack,
                 new EmployeeId(10)
             );
-            var merchPackType = new MerchPackType((int)MerchType.WelcomePack, "WelcomePackTest",
+            var merchPackType = new MerchPackTypeOld((int)MerchTypeOld.WelcomePack, "WelcomePackTest",
                 new[] {MerchItemType.Notepad, MerchItemType.Pen, MerchItemType.Socks});
 
             //Act

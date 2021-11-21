@@ -1,15 +1,16 @@
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate
 {
     public class MerchItemStatus
     {
-        public MerchItemStatus(MerchItemId? merchItemId, MerchItemType merchItemType, Status status)
-        {
-            MerchItemId = merchItemId;
-            MerchItemType = merchItemType;
-            Status = status;
-        }
+        // public MerchItemStatus(MerchItemId? merchItemId, MerchItemType merchItemType, Status status)
+        // {
+        //     MerchItemId = merchItemId;
+        //     MerchItemType = merchItemType;
+        //     Status = status;
+        // }
         
         public MerchItemStatus(MerchItemType merchItemType)
         {

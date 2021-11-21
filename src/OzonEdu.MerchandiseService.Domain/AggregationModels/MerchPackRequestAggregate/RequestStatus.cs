@@ -12,32 +12,32 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// <summary>
         /// В работе
         /// </summary>
-        public static RequestStatus InWork = new(1, "InWork");
+        public static RequestStatus InWork = new(2, "InWork");
 
         /// <summary>
         /// Согласована выдача
         /// </summary>
-        public static RequestStatus Agreed = new(2, "Agreed");
+        public static RequestStatus Agreed = new(3, "Agreed");
 
         /// <summary>
         /// Запрошена выдача
         /// </summary>
-        public static RequestStatus Requested = new(2, "Requested");
+        public static RequestStatus Requested = new(4, "Requested");
 
         /// <summary>
         /// Ожидание поставки
         /// </summary>
-        public static RequestStatus WaitingDelivery = new(2, "WaitingDelivery");
+        public static RequestStatus WaitingDelivery = new(5, "WaitingDelivery");
 
         /// <summary>
         /// Отказано в выдаче
         /// </summary>
-        public static RequestStatus Denied = new(2, "Denied");
+        public static RequestStatus Denied = new(6, "Denied");
 
         /// <summary>
         /// Исполнено
         /// </summary>
-        public static RequestStatus Done = new(2, "Done");
+        public static RequestStatus Done = new(7, "Done");
 
         public RequestStatus(int id, string name) : base(id, name)
         {

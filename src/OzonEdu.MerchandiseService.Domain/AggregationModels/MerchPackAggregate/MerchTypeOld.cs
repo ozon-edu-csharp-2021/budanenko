@@ -1,6 +1,6 @@
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
 {
-    public enum MerchType
+    public enum MerchTypeOld
     {
         /// <summary>
         /// Набор мерча, выдаваемый сотруднику при устройстве на работу.

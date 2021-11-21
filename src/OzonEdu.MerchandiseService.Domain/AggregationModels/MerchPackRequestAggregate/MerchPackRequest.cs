@@ -17,7 +17,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         public MerchPackRequest(
             RequestNumber? requestNumber,
             RequestStatus requestStatus,
-            MerchType merchPack,
+            MerchTypeOld merchPack,
             EmployeeId employeeId)
         {
             RequestNumber = requestNumber;
@@ -39,7 +39,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// <summary>
         /// Пакет мерча
         /// </summary>
-        public MerchType MerchPack { get; private set; }
+        public MerchTypeOld MerchPack { get; private set; }
 
         /// <summary>
         /// ИД сотрудника, которому предназначается мерч

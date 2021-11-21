@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
@@ -41,7 +42,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
 
             var employee = await _employeeRepository.FindByIdAsync(merchPackRequest.EmployeeId, cancellationToken);
 
-            var merchPackType = await _merchPackRepository.GetByIdAsync(merchPackRequest.MerchPack, cancellationToken);
+            var merchPackType = await _merchPackRepository.GetAllMerchItemTypes(merchPackRequest.MerchPack, cancellationToken);
 
             if (Equals(merchPackRequest.RequestStatus, RequestStatus.New))
             {
@@ -80,7 +81,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
 
             await _merchPackRequestRepository.UpdateAsync(merchPackRequest, cancellationToken);
             await _employeeRepository.UpdateAsync(employee, cancellationToken);
-            await _merchPackRequestRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            // await _merchPackRequestRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return Unit.Value;
         }

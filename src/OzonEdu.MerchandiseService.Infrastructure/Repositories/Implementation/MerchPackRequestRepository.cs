@@ -4,30 +4,31 @@ using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate
+namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
 {
     public class MerchPackRequestRepository : IMerchPackRequestRepository
     {
         private readonly List<MerchPackRequest> MerchPackRequests = new List<MerchPackRequest>
         {
-            new MerchPackRequest(new RequestNumber(1), RequestStatus.Done, MerchType.WelcomePack,
+            new MerchPackRequest(new RequestNumber(1), RequestStatus.Done, MerchTypeOld.WelcomePack,
                 new EmployeeId(28)),
-            new MerchPackRequest(new RequestNumber(2), RequestStatus.Done, MerchType.ConferenceListenerPack,
+            new MerchPackRequest(new RequestNumber(2), RequestStatus.Done, MerchTypeOld.ConferenceListenerPack,
                 new EmployeeId(17)),
-            new MerchPackRequest(new RequestNumber(3), RequestStatus.Done, MerchType.ProbationPeriodEndingPack,
+            new MerchPackRequest(new RequestNumber(3), RequestStatus.Done, MerchTypeOld.ProbationPeriodEndingPack,
                 new EmployeeId(28)),
-            new MerchPackRequest(new RequestNumber(4), RequestStatus.Done, MerchType.ConferenceSpeakerPack,
+            new MerchPackRequest(new RequestNumber(4), RequestStatus.Done, MerchTypeOld.ConferenceSpeakerPack,
                 new EmployeeId(7)),
-            new MerchPackRequest(new RequestNumber(5), RequestStatus.Done, MerchType.VeteranPack,
+            new MerchPackRequest(new RequestNumber(5), RequestStatus.Done, MerchTypeOld.VeteranPack,
                 new EmployeeId(7)),
-            new MerchPackRequest(new RequestNumber(6), RequestStatus.Done, MerchType.WelcomePack,
+            new MerchPackRequest(new RequestNumber(6), RequestStatus.Done, MerchTypeOld.WelcomePack,
                 new EmployeeId(83)),
-            new MerchPackRequest(new RequestNumber(7), RequestStatus.Done, MerchType.ConferenceSpeakerPack,
+            new MerchPackRequest(new RequestNumber(7), RequestStatus.Done, MerchTypeOld.ConferenceSpeakerPack,
                 new EmployeeId(17)),
-            new MerchPackRequest(new RequestNumber(8), RequestStatus.Denied, MerchType.ConferenceSpeakerPack,
+            new MerchPackRequest(new RequestNumber(8), RequestStatus.Denied, MerchTypeOld.ConferenceSpeakerPack,
                 new EmployeeId(17)),
         };
 

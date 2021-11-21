@@ -3,7 +3,11 @@
 set -e
 run_cmd="dotnet OzonEdu.MerchandiseService.dll --no-build -v d"
 
+sleep 5
+
 >&2 echo "Run MerchandiseService DB Migrations"
+
+dotnet OzonEdu.MerchandiseService.Migrator.dll --no-build -v d -- --dryrun
 
 dotnet OzonEdu.MerchandiseService.Migrator.dll --no-build -v d
 

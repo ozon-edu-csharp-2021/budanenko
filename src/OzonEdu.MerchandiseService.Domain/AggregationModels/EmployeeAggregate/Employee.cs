@@ -13,7 +13,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
         private readonly HiringDate _hiringDate;
         private readonly ClothingSize _clothingSize;
         private readonly FiringDate? _firingDate;
-        private readonly List<MerchType> _receivedMerchTypes;
+        private readonly List<MerchTypeOld> _receivedMerchTypes;
 
         /// <summary>
         /// Сотрудник
@@ -25,7 +25,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             HiringDate hiringDate,
             ClothingSize clothingSize,
             FiringDate? firingDate,
-            IReadOnlyCollection<MerchType>? receivedMerchTypes)
+            IReadOnlyCollection<MerchTypeOld>? receivedMerchTypes)
         {
             _employeeId = employeeId;
             _employeeFullName = employeeFullName;
@@ -33,7 +33,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             _hiringDate = hiringDate;
             _clothingSize = clothingSize;
             _firingDate = firingDate;
-            _receivedMerchTypes = receivedMerchTypes?.ToList() ?? new List<MerchType>();
+            _receivedMerchTypes = receivedMerchTypes?.ToList() ?? new List<MerchTypeOld>();
         }
 
         /// <summary>
@@ -69,14 +69,14 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
         /// <summary>
         /// Список ранее выданных наборов мерча
         /// </summary>
-        public IReadOnlyCollection<MerchType> ReceivedMerchTypes => _receivedMerchTypes;
+        public IReadOnlyCollection<MerchTypeOld> ReceivedMerchTypes => _receivedMerchTypes;
 
         /// <summary>
         /// Проверка выдавался ли ранее данный набор сотруднику
         /// </summary>
         /// <param name="requestMerchPack">Набор мерча</param>
         /// <returns>Результат: выдавался или нет</returns>
-        public bool IsPreviouslyReceived(MerchType requestMerchPack)
+        public bool IsPreviouslyReceived(MerchTypeOld requestMerchPack)
         {
             return ReceivedMerchTypes.Contains(requestMerchPack);
         }
@@ -85,7 +85,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
         /// Добавить в список раннее выданных пакетов новый набор
         /// </summary>
         /// <param name="requestMerchPack">Набор мерча</param>
-        public void AddReceivedMerchType(MerchType requestMerchPack)
+        public void AddReceivedMerchType(MerchTypeOld requestMerchPack)
         {
             _receivedMerchTypes.Add(requestMerchPack);
         }

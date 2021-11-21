@@ -22,13 +22,13 @@ namespace OzonEdu.MerchandiseService.Domain.Tests
                 null,
                 null
                 );
-            var requestMerchPack = MerchType.WelcomePack;
+            var requestMerchPack = MerchTypeOld.WelcomePack;
         
             //Act
             employee.AddReceivedMerchType(requestMerchPack);
 
             //Assert
-            Assert.True(employee.ReceivedMerchTypes.First() == MerchType.WelcomePack);
+            Assert.True(employee.ReceivedMerchTypes.First() == MerchTypeOld.WelcomePack);
         }
         
         [Fact]
@@ -44,7 +44,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests
                 null,
                 null
             );
-            var requestMerchPack = MerchType.WelcomePack;
+            var requestMerchPack = MerchTypeOld.WelcomePack;
         
             //Act
             var result = employee.IsPreviouslyReceived(requestMerchPack);

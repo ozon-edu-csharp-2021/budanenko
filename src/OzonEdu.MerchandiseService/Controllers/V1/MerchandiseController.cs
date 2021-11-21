@@ -1,50 +1,61 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OzonEdu.MerchandiseService.Services.Interfaces;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
+using OzonEdu.MerchandiseService.HttpModels;
+using OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest;
+using OzonEdu.MerchandiseService.Infrastructure.Queries.EmployeeAggregate;
 
 namespace OzonEdu.MerchandiseService.Controllers.V1
 {
-    [ApiController]
-    [Route("v1/api/merchandise")]
-    [Produces("application/json")]
     public class MerchandiseController : ControllerBase
     {
-        private readonly IMerchandiseService _merchandiseService;
+        private readonly IMediator _mediator;
 
-        public MerchandiseController(IMerchandiseService merchandiseService)
+        public MerchandiseController(IMediator mediator)
         {
-            _merchandiseService = merchandiseService;
+            _mediator = mediator;
         }
 
         /// <summary>
-        /// Запросить все
+        /// Добавляет запрос на выдачу мерча
         /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> GetAll(CancellationToken token)
+        [HttpPost]
+        [Route("v1/api/merchandise/add")]
+        public async Task<ActionResult<MerchPackRequest>> AddMerchPackRequest(
+            AddMerchPackRequestModel postViewModel,
+            CancellationToken token)
         {
-            var merchItems = await _merchandiseService.GetAll(token);
-            return Ok(merchItems);
+            var addMerchPackRequestCommand = new AddMerchPackRequestCommand()
+            {
+                EmployeeId = postViewModel.EmployeeId,
+                MerchPack = postViewModel.MerchPack
+            };
+
+            var result = await _mediator.Send(addMerchPackRequestCommand, token);
+
+            return Ok(result);
         }
 
         /// <summary>
-        /// Получить информацию о выданном мерче
+        /// Получить информацию о мерче, выданном сотруднику
         /// </summary>
-        [HttpGet("employee/{employeeId:long}")]
-        public async Task<IActionResult> MerchandiseIssuedEmployee(long employeeId, CancellationToken token)
+        [HttpPost]
+        [Route("v1/api/merchandise/get")]
+        public async Task<ActionResult<List<MerchTypeOld>>> GetMerchandiseIssuedEmployee(
+            GetMerchPackIssuedEmployeeModel getMerchPackIssuedEmployeeModel,
+            CancellationToken token)
         {
-            var merchItems = await _merchandiseService.MerchandiseIssuedEmployee(employeeId, token);
-            return Ok(merchItems);
-        }
+            var query = new GetMerchPackIssuedEmployeeQuery()
+            {
+                EmployeeId = getMerchPackIssuedEmployeeModel.EmployeeId
+            };
 
-        /// <summary>
-        /// Запрос на выдачу мерча
-        /// </summary>
-        [HttpPost("employee/{employeeId:long}/request")]
-        public async Task<IActionResult> MerchandiseRequest(long employeeId, CancellationToken token)
-        {
-            var merchItems = await _merchandiseService.MerchandiseRequest(employeeId, token);
-            return Ok(merchItems);
+            var result = await _mediator.Send(query, token);
+            return Ok(result);
         }
     }
 }
