@@ -21,18 +21,20 @@ namespace OzonEdu.MerchandiseService.Controllers.V1
         }
 
         /// <summary>
-        /// Добавляет запрос на выдачу мерча
+        /// Добавляет запрос на выдачу мерча сотруднику
         /// </summary>
         [HttpPost]
         [Route("v1/api/merchandise/add")]
-        public async Task<ActionResult<MerchPackRequest>> AddMerchPackRequest(
-            AddMerchPackRequestModel postViewModel,
+        public async Task<ActionResult<long>> AddMerchPackRequest(
+            AddMerchPackRequestPostViewModel postViewModel,
             CancellationToken token)
         {
             var addMerchPackRequestCommand = new AddMerchPackRequestCommand()
             {
+                MerchPackType = postViewModel.MerchPackType,
                 EmployeeId = postViewModel.EmployeeId,
-                MerchPack = postViewModel.MerchPack
+                ClothingSize = postViewModel.ClothingSize,
+                Email = postViewModel.Email
             };
 
             var result = await _mediator.Send(addMerchPackRequestCommand, token);

@@ -15,21 +15,26 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
     public class MerchPackRequest : Entity
     {
         public MerchPackRequest(
-            RequestNumber? requestNumber,
+            MerchPackRequestId? merchPackRequestId,
             RequestStatus requestStatus,
-            MerchTypeOld merchPack,
-            EmployeeId employeeId)
+            MerchPackType merchPackType,
+            EmployeeId employeeId,
+            ClothingSize? clothingSize,
+            Email email
+        )
         {
-            RequestNumber = requestNumber;
+            MerchPackRequestId = merchPackRequestId;
             RequestStatus = requestStatus;
-            MerchPack = merchPack;
+            MerchPackType = merchPackType;
             EmployeeId = employeeId;
+            ClothingSize = clothingSize;
+            Email = email;
         }
 
         /// <summary>
         /// Номер заявки
         /// </summary>
-        public RequestNumber? RequestNumber { get; private set; }
+        public MerchPackRequestId? MerchPackRequestId { get; private set; }
 
         /// <summary>
         /// Статус заявки
@@ -39,7 +44,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// <summary>
         /// Пакет мерча
         /// </summary>
-        public MerchTypeOld MerchPack { get; private set; }
+        public MerchPackType MerchPackType { get; private set; }
 
         /// <summary>
         /// ИД сотрудника, которому предназначается мерч
@@ -47,9 +52,19 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         public EmployeeId EmployeeId { get; private set; }
 
         /// <summary>
+        /// Размер одежды сотрудника
+        /// </summary>
+        public ClothingSize? ClothingSize { get; private set; }
+        
+        /// <summary>
+        /// Электронный адрес сотрудника
+        /// </summary>
+        public Email Email { get;private set; }
+        
+        /// <summary>
         /// 
         /// </summary>
-        public IReadOnlyCollection<MerchItemStatus>? MerchItemsStatus { get; private set; }
+        public IReadOnlyCollection<MerchItem>? MerchItems { get; private set; }
 
         /// <summary>
         /// Причина отказа в выдаче пакета мерча
@@ -57,12 +72,15 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         public ReasonDenied? ReasonDenied { get; private set; }
 
         /// <summary>
-        /// Присвоить номер заявки
+        /// Присвоить ИД записи
         /// </summary>
         /// <param name="requestNumber"></param>
-        public void SetRequestNumber(long requestNumber)
+        public void SetMerchPackRequestId(long merchPackRequestId)
         {
-            RequestNumber = new RequestNumber(requestNumber);
+            if (MerchPackRequestId == default)
+                MerchPackRequestId = new MerchPackRequestId(merchPackRequestId);
+            else
+                throw new MerchPackRequestException($"MerchPackRequestId change not available!");
         }
 
         /// <summary>
@@ -73,14 +91,14 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         public void ChangeStatus(RequestStatus status)
         {
             if (RequestStatus.Equals(RequestStatus.Done))
-                throw new MerchPackRequestStatusException($"Request in done. Change status unavailable");
+                throw new MerchPackRequestException($"Request in done. Change status unavailable!");
 
             RequestStatus = status;
         }
 
         public void CreateMerchItemsStatus(List<MerchItemType> merchTypes)
         {
-            MerchItemsStatus = merchTypes.Select(merchItemType => new MerchItemStatus(merchItemType)).ToList();
+            MerchItems = merchTypes.Select(merchItemType => new MerchItem(merchItemType)).ToList();
         }
     }
 }

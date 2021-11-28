@@ -13,6 +13,8 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
                 .WithColumn("mpr_status_id").AsInt32().NotNullable()
                 .WithColumn("merch_pack_type_id").AsInt32().NotNullable()
                 .WithColumn("employee_id").AsInt64().NotNullable()
+                .WithColumn("employee_clothing_size_id").AsInt32().Nullable()
+                .WithColumn("employee_email").AsString().Nullable()
                 .WithColumn("mpr_create_date").AsDateTime().NotNullable()
                 .WithColumn("mpr_change_date").AsDateTime().Nullable();
         }

@@ -1,10 +1,6 @@
-using MediatR;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
-
-namespace OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest
+namespace OzonEdu.MerchandiseService.HttpModels
 {
-    public class AddMerchPackRequestCommand : IRequest<long>
+    public class AddMerchPackRequestPostViewModel
     {
         /// <summary>
         /// Тип пакета мерча, запрошенный для выдачи сотруднику
@@ -15,7 +11,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest
         /// Ид сотрудника
         /// </summary>
         public long EmployeeId { get; set; }
-        
+
         /// <summary>
         /// Размер одежды сотрудника
         /// </summary>

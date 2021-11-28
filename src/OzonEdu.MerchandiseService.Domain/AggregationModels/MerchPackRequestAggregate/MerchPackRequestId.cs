@@ -1,8 +1,8 @@
 ﻿namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate
 {
-    public class RequestNumber
+    public class MerchPackRequestId
     {
-        public RequestNumber(long value)
+        public MerchPackRequestId(long value)
         {
             Value = value;
         }

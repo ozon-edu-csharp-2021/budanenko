@@ -1,10 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces
 {
-    public interface IMerchPackRepositoryOld : IRepository<MerchPackTypeOld>
+    public interface IMerchPackRepositoryOld : IRepository<MerchPackRequest>
     {
         // /// <summary>
         // /// Получить MerchPackType по идентификатору

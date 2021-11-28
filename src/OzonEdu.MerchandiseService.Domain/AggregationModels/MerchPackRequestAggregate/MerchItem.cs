@@ -3,7 +3,7 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate
 {
-    public class MerchItemStatus
+    public class MerchItem
     {
         // public MerchItemStatus(MerchItemId? merchItemId, MerchItemType merchItemType, Status status)
         // {
@@ -12,7 +12,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         //     Status = status;
         // }
         
-        public MerchItemStatus(MerchItemType merchItemType)
+        public MerchItem(MerchItemType merchItemType)
         {
             MerchItemId = null;
             MerchItemType = merchItemType;

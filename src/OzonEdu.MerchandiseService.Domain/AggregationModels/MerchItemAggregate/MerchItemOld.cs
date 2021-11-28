@@ -1,11 +1,12 @@
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.Models;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 {
-    public class MerchItem : Entity
+    public class MerchItemOld : Entity
     {
-        public MerchItem(
+        public MerchItemOld(
             MerchItemId merchItemId,
             Name name,
             MerchItemType merchItemType,

@@ -1,4 +1,4 @@
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate
 {
     public class EmployeeId
     {

@@ -5,7 +5,6 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Inte
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 using OzonEdu.MerchandiseService.Domain.Services.MailService;
 using OzonEdu.MerchandiseService.Domain.Services.StockApi;
@@ -27,9 +26,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
         /// <returns>Объект <see cref="IServiceCollection"/></returns>
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
             services.AddHostedService<AssembleMerchItemsBackgroundService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IMerchPackRepository, MerchPackRepository>();
+            // services.AddScoped<IMerchPackRepository, MerchPackRepository>();
             services.AddScoped<IMerchPackRequestRepository, MerchPackRequestRepository>();
             services.AddScoped<IMailServiceFacade, MailServiceFacade>();
             services.AddScoped<IStockApiFacade, StockApiFacade>();

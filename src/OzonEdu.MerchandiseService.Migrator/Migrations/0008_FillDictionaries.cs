@@ -10,13 +10,13 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
             Execute.Sql(@"
                 INSERT INTO merch_pack_request_status (mpr_status_id, mpr_status_name)
                 VALUES 
-                    (1, 'Новая'),
-                    (2, 'В работе'),
-                    (3, 'Согласована выдача'),
-                    (4, 'Запрошена выдача'),
-                    (5, 'Ожидание поставки'),
+                    (1, 'New'),
+                    (2, 'In work'),
+                    (3, 'Agreeded'),
+                    (4, 'Requested'),
+                    (5, 'Waiting delivery'),
                     (6, 'Отказано в выдаче'),
-                    (7, 'Исполнено')
+                    (7, 'Done')
                 ON CONFLICT DO NOTHING
             ");
 
@@ -25,14 +25,14 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
                 VALUES 
                     (1,  'Starter'),
                     (2,  'AfterProbation'),
-                    (3,  'СonferenceSpeaker'),
-                    (4,  'СonferenceListener'),
+                    (3,  'ConferenceSpeaker'),
+                    (4,  'ConferenceListener'),
                     (5,  'Veteran')
                 ON CONFLICT DO NOTHING
             ");
 
             Execute.Sql(@"
-                INSERT INTO merch_item_type (merch_item_type_id, merch_item_type_id)
+                INSERT INTO merch_item_type (merch_item_type_id, merch_item_type_name)
                 VALUES 
                     (1,  'TShirtStarter'),
                     (2,  'NotepadStarter'),
@@ -40,12 +40,12 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
                     (4,  'SocksStarter'),
                     (5,  'TShirtAfterProbation'),
                     (6,  'SweatshirtAfterProbation'),
-                    (7,  'SweatshirtСonferenceSpeaker'),
-                    (8,  'NotepadСonferenceSpeaker'),
-                    (9,  'PenСonferenceSpeaker'),
-                    (10, 'TShirtСonferenceListener'),
-                    (11, 'NotepadСonferenceListener'),
-                    (12, 'PenСonferenceListener'),
+                    (7,  'SweatshirtConferenceSpeaker'),
+                    (8,  'NotepadConferenceSpeaker'),
+                    (9,  'PenConferenceSpeaker'),
+                    (10, 'TShirtConferenceListener'),
+                    (11, 'NotepadConferenceListener'),
+                    (12, 'PenConferenceListener'),
                     (13, 'TShirtVeteran'),
                     (14, 'SweatshirtVeteran'),
                     (15, 'NotepadVeteran'),
@@ -55,7 +55,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
             ");
 
             Execute.Sql(@"
-                INSERT INTO merch_pack_items_map (merch_pack_type_id, merch_item_type_name)
+                INSERT INTO merch_pack_items_map (merch_pack_type_id, merch_item_type_id)
                 VALUES 
                     (1, 1),
                     (1, 2),

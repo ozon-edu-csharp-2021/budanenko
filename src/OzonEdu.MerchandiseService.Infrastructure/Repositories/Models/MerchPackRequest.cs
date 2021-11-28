@@ -13,6 +13,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Models
         public int MerchPackTypeId { get; set; }
         
         public long EmployeeId { get; set; }
+
+        public int ClothingSize { get; set; }
+        
+        public string Email { get; set; }
         
         public DateTime MerchPackRequestCreateDate { get; set; }
 

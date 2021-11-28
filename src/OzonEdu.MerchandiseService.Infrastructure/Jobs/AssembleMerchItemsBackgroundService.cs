@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate.Interfaces;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AssembleMerchItems;
 
 namespace OzonEdu.MerchandiseService
@@ -35,11 +35,11 @@ namespace OzonEdu.MerchandiseService
                 {
                     var merchPackRequests =
                         await merchPackRequestRepository.GetMerchPackRequestForAssembly(stoppingToken);
-
+                    
                     foreach (var merchPackRequest in merchPackRequests.Select(merchPackRequest =>
                         new AssembleMerchItemsCommand()
                         {
-                            RequestNumber = merchPackRequest.RequestNumber!.Value
+                            MerchPackRequest = merchPackRequest
                         }))
                     {
                         var result = await _mediator.Send(merchPackRequest, stoppingToken);
