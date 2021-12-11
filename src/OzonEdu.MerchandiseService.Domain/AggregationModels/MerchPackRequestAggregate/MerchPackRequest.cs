@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.Exceptions.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.Models;
@@ -20,7 +18,9 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
             MerchPackType merchPackType,
             EmployeeId employeeId,
             ClothingSize? clothingSize,
-            Email email
+            Email email,
+            CreateDate createDate,
+            ChangeDate? changeDate
         )
         {
             MerchPackRequestId = merchPackRequestId;
@@ -29,6 +29,8 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
             EmployeeId = employeeId;
             ClothingSize = clothingSize;
             Email = email;
+            CreateDate = createDate;
+            ChangeDate = changeDate;
         }
 
         /// <summary>
@@ -60,9 +62,19 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// Электронный адрес сотрудника
         /// </summary>
         public Email Email { get;private set; }
+
+        /// <summary>
+        /// Дата и время создания заявки
+        /// </summary>
+        public CreateDate CreateDate { get; private set; }
         
         /// <summary>
-        /// 
+        /// Дата и время изменения заявки
+        /// </summary>
+        public ChangeDate? ChangeDate { get; private set; }
+
+        /// <summary>
+        /// Список единиц мерча, подлежащих выдаче сотруднику в соответствии с запрошенным пакетом мерча
         /// </summary>
         public IReadOnlyCollection<MerchItem>? MerchItems { get; private set; }
 

@@ -15,6 +15,7 @@ namespace OzonEdu.MerchandiseService
         private Timer _timer = null!;
         private readonly IMediator _mediator;
         private readonly IServiceProvider _serviceProvider;
+        private bool isLoadSku = false;
 
         public AssembleMerchItemsBackgroundService(
             IMediator mediator,
@@ -28,6 +29,14 @@ namespace OzonEdu.MerchandiseService
         {
             async void AssembleMerchItemsJob(object state)
             {
+                if (!isLoadSku)
+                {
+                    var a = 0;
+                    a++;
+                    isLoadSku = true;
+                }
+                
+                
                 using var scope = _serviceProvider.CreateScope();
                 var merchPackRequestRepository =
                     scope.ServiceProvider.GetRequiredService<IMerchPackRequestRepository>();

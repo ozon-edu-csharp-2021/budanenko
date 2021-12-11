@@ -1,8 +1,6 @@
-using MediatR;
-
-namespace OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest
+namespace OzonEdu.MerchandiseService.Infrastructure.Models
 {
-    public class AddMerchPackRequestCommand : IRequest<long>
+    public class MerchPackRequestDto
     {
         /// <summary>
         /// Тип пакета мерча, запрошенный для выдачи сотруднику

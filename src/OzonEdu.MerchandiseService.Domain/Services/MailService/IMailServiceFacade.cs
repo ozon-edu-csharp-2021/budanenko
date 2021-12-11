@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 
 namespace OzonEdu.MerchandiseService.Domain.Services.MailService

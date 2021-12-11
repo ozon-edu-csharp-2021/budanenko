@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.HttpModels;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AddMerchPackRequest;
-using OzonEdu.MerchandiseService.Infrastructure.Queries.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Infrastructure.Queries.MerchPackRequestAggregate;
 
 namespace OzonEdu.MerchandiseService.Controllers.V1
 {

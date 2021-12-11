@@ -28,7 +28,14 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAg
         /// </summary>
         /// <param name="cancellationToken">Токен для отмены операции. <see cref="CancellationToken"/></param>
         /// <returns>Список заявок на выдачу мерча</returns>
-        Task<List<MerchPackRequest>> GetMerchPackRequestForAssembly(CancellationToken cancellationToken = default);
-
+        Task<IReadOnlyCollection<MerchPackRequest>> GetMerchPackRequestForAssembly(CancellationToken cancellationToken = default);
+ 
+        /// <summary>
+        /// Получить список заявок для набора пакетов с мерчем по сотруднику
+        /// </summary>
+        /// <param name="employeeId">ИД сотрудника</param>
+        /// <param name="cancellationToken">Токен для отмены операции</param>
+        /// <returns>Список заявок на выдачу мерча</returns>
+        Task<IReadOnlyCollection<MerchPackRequest>> GetMerchPackRequestsByEmployeeIdAsync(EmployeeId employeeId, CancellationToken cancellationToken = default);
     }
 }

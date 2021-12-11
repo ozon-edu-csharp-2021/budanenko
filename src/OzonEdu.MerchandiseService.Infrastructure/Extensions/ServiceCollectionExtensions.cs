@@ -1,16 +1,19 @@
+using Grpc.Net.Client;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 using OzonEdu.MerchandiseService.Domain.Services.MailService;
 using OzonEdu.MerchandiseService.Domain.Services.StockApi;
+using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation;
 using OzonEdu.MerchandiseService.Infrastructure.Repositories.Infrastructure;
 using OzonEdu.MerchandiseService.Infrastructure.Repositories.Infrastructure.Interfaces;
+using OzonEdu.StockApi.Grpc;
+using OzonEdu.StockApi.Infrastructure.Configuration;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
 {
@@ -33,22 +36,41 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
             services.AddScoped<IMerchPackRequestRepository, MerchPackRequestRepository>();
             services.AddScoped<IMailServiceFacade, MailServiceFacade>();
             services.AddScoped<IStockApiFacade, StockApiFacade>();
-            services.AddScoped<IDbConnectionFactory<NpgsqlConnection>, NpgsqlConnectionFactory>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IChangeTracker, ChangeTracker>();
-            services.AddScoped<IQueryExecutor, QueryExecutor>();
+            // services.AddScoped<IDbConnectionFactory<NpgsqlConnection>, NpgsqlConnectionFactory>();
+            // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // services.AddScoped<IChangeTracker, ChangeTracker>();
+            // services.AddScoped<IQueryExecutor, QueryExecutor>();
             
             return services;
         }
         
-        /// <summary>
-        /// Добавление в DI контейнер инфраструктурных репозиториев
-        /// </summary>
-        /// <param name="services">Объект IServiceCollection</param>
-        /// <returns>Объект <see cref="IServiceCollection"/></returns>
-        public static IServiceCollection AddInfrastructureRepositories(this IServiceCollection services)
+        public static IServiceCollection AddDatabaseConnection(this IServiceCollection services,
+            IConfiguration configuration)
         {
+            services.Configure<DatabaseConnectionOptions>(configuration.GetSection(nameof(DatabaseConnectionOptions)));
             
+            services.AddScoped<IDbConnectionFactory<NpgsqlConnection>, NpgsqlConnectionFactory>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IChangeTracker, ChangeTracker>();
+            services.AddScoped<IQueryExecutor, QueryExecutor>();
+
+            return services;
+        }
+        
+        public static IServiceCollection AddStockApiGrpcServiceClient(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionAddress = configuration.GetSection(nameof(StockApiGrpcServiceConfiguration))
+                .Get<StockApiGrpcServiceConfiguration>().ServerAddress;
+            if(string.IsNullOrWhiteSpace(connectionAddress))
+                connectionAddress = configuration
+                    .Get<StockApiGrpcServiceConfiguration>()
+                    .ServerAddress;
+
+            services.AddScoped<StockApiGrpc.StockApiGrpcClient>(opt =>
+            {
+                var channel = GrpcChannel.ForAddress(connectionAddress);
+                return new StockApiGrpc.StockApiGrpcClient(channel);
+            });
             return services;
         }
     }

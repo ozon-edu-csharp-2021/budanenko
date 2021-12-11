@@ -1,8 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
-using Grpc.Core;
-using OzonEdu.MerchandiseService.Grpc;
-
 namespace OzonEdu.MerchandiseService.Services
 {
     public class MerchandiseServiceGrpc : Grpc.MerchandiseServiceGrpc.MerchandiseServiceGrpcBase

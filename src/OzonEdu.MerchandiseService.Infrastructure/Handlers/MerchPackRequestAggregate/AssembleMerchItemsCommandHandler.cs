@@ -1,54 +1,56 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
 using MediatR;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.Interfaces;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Interfaces;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.Services.MailService;
 using OzonEdu.MerchandiseService.Domain.Services.StockApi;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.AssembleMerchItems;
+using OzonEdu.StockApi.Grpc;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAggregate
 {
     public class AssembleMerchItemsCommandHandler : IRequestHandler<AssembleMerchItemsCommand, Unit>
     {
-        private readonly IEmployeeRepository _employeeRepository;
+        // private readonly IEmployeeRepository _employeeRepository;
 
         private readonly IMerchPackRequestRepository _merchPackRequestRepository;
-
+        private readonly StockApiGrpc.StockApiGrpcClient _stockApiGrpcClient;
         // private readonly IMerchPackRepository _merchPackRepository;
         private readonly IStockApiFacade _stockApiFacade;
         private readonly IMailServiceFacade _mailServiceFacade;
 
         public AssembleMerchItemsCommandHandler(
-            IEmployeeRepository employeeRepository,
+            // IEmployeeRepository employeeRepository,
             IMerchPackRequestRepository merchPackRequestRepository,
             // IMerchPackRepository merchPackRepository,
             IStockApiFacade stockApiFacade,
-            IMailServiceFacade mailServiceFacade)
+            IMailServiceFacade mailServiceFacade, 
+            StockApiGrpc.StockApiGrpcClient stockApiGrpcClient)
         {
-            _employeeRepository = employeeRepository;
+            // _employeeRepository = employeeRepository;
             _merchPackRequestRepository = merchPackRequestRepository;
             // _merchPackRepository = merchPackRepository;
             _stockApiFacade = stockApiFacade;
             _mailServiceFacade = mailServiceFacade;
+            _stockApiGrpcClient = stockApiGrpcClient;
         }
 
         public async Task<Unit> Handle(AssembleMerchItemsCommand request, CancellationToken cancellationToken)
         {
-            if (Equals(request.MerchPackRequest.RequestStatus, RequestStatus.New))
-            {
-                _merchPackRequestRepository.CreateMerchItems(request.MerchPackRequest);
-            }
-
+            // if (Equals(request.MerchPackRequest.RequestStatus, RequestStatus.New))
+            // {
+            //     _merchPackRequestRepository.CreateMerchItems(request.MerchPackRequest);
+            // }
+            var a = _stockApiGrpcClient.GetAllStockItems(new Empty(), null, null, cancellationToken);
+            
             request.MerchPackRequest.ChangeStatus(RequestStatus.InWork);
             var resultUpdateRecord =
                 await _merchPackRequestRepository.UpdateStatusAsync(request.MerchPackRequest, cancellationToken);
 
             // var merchPackRequest =
-            //     await _merchPackRequestRepository.FindByRequestNumberA+sync(new MerchPackRequestId(request.RequestNumber), cancellationToken);
+            //     await _merchPackRequestRepository.FindByRequestNumberAsync(new MerchPackRequestId(request.RequestNumber), cancellationToken);
 
             // var employee = await _employeeRepository.FindByIdAsync(merchPackRequest.EmployeeId, cancellationToken);
 

@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackRequestAggregate;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
@@ -75,7 +72,12 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
             throw new System.NotImplementedException();
         }
 
-        public Task<List<MerchPackRequest>> GetMerchPackRequestForAssembly(CancellationToken cancellationToken = default)
+        public Task<IReadOnlyCollection<MerchPackRequest>> GetMerchPackRequestForAssembly(CancellationToken cancellationToken = default)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<IReadOnlyCollection<MerchPackRequest>> GetMerchPackRequestsByEmployeeIdAsync(EmployeeId employeeId, CancellationToken cancellationToken = default)
         {
             throw new System.NotImplementedException();
         }

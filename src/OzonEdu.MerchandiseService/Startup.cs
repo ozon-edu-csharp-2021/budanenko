@@ -23,9 +23,11 @@ namespace OzonEdu.MerchandiseService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<DatabaseConnectionOptions>(Configuration.GetSection(nameof(DatabaseConnectionOptions)));
+            // services.Configure<DatabaseConnectionOptions>(Configuration.GetSection(nameof(DatabaseConnectionOptions)));
             services.AddMediatR(typeof(Startup), typeof(DatabaseConnectionOptions));
             services.AddInfrastructureServices();
+            services.AddDatabaseConnection(Configuration);
+            services.AddStockApiGrpcServiceClient(Configuration);
             services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
         }
 

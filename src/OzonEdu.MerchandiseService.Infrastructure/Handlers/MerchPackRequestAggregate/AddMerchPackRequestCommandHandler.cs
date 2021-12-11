@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,11 +29,18 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
                 .GetAll<ClothingSize>()
                 .FirstOrDefault(it => it.Id.Equals(request.ClothingSize));
             var email = new Email(request.Email);
-/*
-            var isPreviouslyReceived = employee.IsPreviouslyReceived(request.MerchPack);
+            var createDate = new CreateDate(DateTime.Now);
+
+            var listAllMerchPackRequestsByEmployee =
+                await _merchPackRequestRepository.GetMerchPackRequestsByEmployeeIdAsync(employeeId, cancellationToken);
+            var isPreviouslyReceived = listAllMerchPackRequestsByEmployee.Any(x =>
+            {
+                var last12months = DateTime.Now.AddYears(-1);
+                return x.MerchPackType.Id == merchPackType.Id && x.CreateDate.Value >= last12months;
+            });
             if (isPreviouslyReceived)
                 throw new Exception("Данный мерч пак уже выдан сотруднику");
-*/
+            
             // Создание запроса на выдачу мерча
             var merchPackRequest = new MerchPackRequest(
                 null,
@@ -40,7 +48,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.MerchPackRequestAgg
                 merchPackType,
                 employeeId,
                 clothingSize,
-                email
+                email,
+                createDate,
+                null
             );
 
             var resultCreate = await _merchPackRequestRepository.CreateAsync(merchPackRequest, cancellationToken);
